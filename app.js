@@ -343,6 +343,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  // Mobile Navbar Toggle Setup
+  const toggleBtn = document.getElementById('nav-toggle');
+  const navLinksList = document.getElementById('nav-links');
+  if (toggleBtn && navLinksList) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleBtn.classList.toggle('active');
+      navLinksList.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside of the navbar
+    document.addEventListener('click', (e) => {
+      if (!toggleBtn.contains(e.target) && !navLinksList.contains(e.target)) {
+        toggleBtn.classList.remove('active');
+        navLinksList.classList.remove('active');
+      }
+    });
+
+    // Close mobile menu when a link inside it is clicked
+    navLinksList.querySelectorAll('a').forEach(anchor => {
+      anchor.addEventListener('click', () => {
+        toggleBtn.classList.remove('active');
+        navLinksList.classList.remove('active');
+      });
+    });
+  }
+
   // Setup FAQ Accordions
   const faqQuestions = document.querySelectorAll('.faq-question');
   faqQuestions.forEach(btn => {
