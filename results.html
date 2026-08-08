@@ -22,7 +22,12 @@
       <a href="index.html" class="logo">
         <span>🧬</span> HelixHack_
       </a>
-      <ul class="nav-links">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Overview</a></li>
         <li><a href="details.html">Rules</a></li>
         <li><a href="register.html">Register</a></li>
@@ -41,9 +46,9 @@
 
     <!-- Podium Placements -->
     <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); text-align:center;">🏆 Final Placements (Mock Podium)</h3>
-    <div class="grid-3" style="margin-bottom: 4rem; align-items: flex-end;">
+    <div class="results-podium" style="margin-bottom: 4rem;">
       <!-- 2nd Place -->
-      <div class="card" style="text-align:center; padding: 1.5rem; order: 1; border-color: rgba(148, 163, 184, 0.3);">
+      <div class="card podium-2nd" style="text-align:center; padding: 1.5rem; border-color: rgba(148, 163, 184, 0.3);">
         <span style="font-size:1.5rem;">🥈</span>
         <h4 style="font-family:var(--font-heading); margin-top:0.5rem;">2nd Place</h4>
         <div style="font-size:1.25rem; font-weight:700; color:var(--color-text-main); margin: 0.5rem 0;" id="place-2">EcoWarriors</div>
@@ -51,7 +56,7 @@
         <span style="display:inline-block; font-size:0.75rem; background:rgba(255,255,255,0.05); padding:0.25rem 0.5rem; border-radius:4px; margin-top:0.75rem;" id="place-2-score">Score: 89</span>
       </div>
       <!-- 1st Place -->
-      <div class="card" style="text-align:center; padding: 2.5rem 1.5rem; order: 2; border-color: rgba(234, 179, 8, 0.5); transform: translateY(-10px);">
+      <div class="card podium-1st" style="text-align:center; padding: 2.5rem 1.5rem; border-color: rgba(234, 179, 8, 0.5);">
         <span style="font-size:2rem;">👑</span>
         <h4 style="font-family:var(--font-heading); margin-top:0.5rem; color:var(--color-primary);">1st Place Winner</h4>
         <div style="font-size:1.5rem; font-weight:800; color:var(--color-text-main); margin: 0.5rem 0;" id="place-1">AI Titans</div>
@@ -59,7 +64,7 @@
         <span style="display:inline-block; font-size:0.8rem; background:rgba(14,165,233,0.1); border:1px solid rgba(14,165,233,0.3); padding:0.25rem 0.75rem; border-radius:4px; margin-top:0.75rem; font-weight:600; color:var(--color-primary);" id="place-1-score">Score: 98</span>
       </div>
       <!-- 3rd Place -->
-      <div class="card" style="text-align:center; padding: 1.25rem; order: 3; border-color: rgba(180, 83, 9, 0.3);">
+      <div class="card podium-3rd" style="text-align:center; padding: 1.25rem; border-color: rgba(180, 83, 9, 0.3);">
         <span style="font-size:1.25rem;">🥉</span>
         <h4 style="font-family:var(--font-heading); margin-top:0.5rem;">3rd Place</h4>
         <div style="font-size:1.15rem; font-weight:700; color:var(--color-text-main); margin: 0.5rem 0;" id="place-3">MindSafe</div>
@@ -69,7 +74,7 @@
     </div>
 
     <!-- Leaderboards Grid -->
-    <div style="display:grid; grid-template-cols: 1fr 350px; gap: 2rem; align-items: flex-start;">
+    <div class="results-grid">
       <!-- Competing Teams List -->
       <div class="card" style="overflow-x: auto;">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; border-bottom:1px solid var(--border-glass); padding-bottom:1rem; margin-bottom:1.5rem;">

@@ -30,7 +30,12 @@
       <a href="index.html" class="logo">
         <span>🧬</span> HelixHack_
       </a>
-      <ul class="nav-links">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="index.html" class="active">Overview</a></li>
         <li><a href="details.html">Rules</a></li>
         <li><a href="register.html">Register</a></li>
@@ -74,7 +79,7 @@
       <div class="card" style="display:flex; flex-direction:column; justify-content:center; gap:1rem; pointer-events: auto;">
         <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">
           <span style="color:var(--color-text-muted);">Event Format</span>
-          <span style="font-weight:600;">Qualifying + Offline Finale</span>
+          <span style="font-weight:600;">Online Qualifier Round + Offline Finale</span>
         </div>
         <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">
           <span style="color:var(--color-text-muted);">Location</span>
@@ -245,7 +250,7 @@
       <div class="faq-item">
         <button class="faq-question">How does judging work?</button>
         <div class="faq-answer">
-          Judging is worth 100 points: Innovation & Originality (25), STEM Integration (20), Feasibility (20), Impact (15), Execution Quality (10), and Presentation (10) + a 5-point bonus for consistent daily Discord logging.
+          Judging is worth 100 points: Innovation & Originality (25), STEM Integration (20), Feasibility (25), Impact (15), Execution Quality (10), and Presentation (10) + a 5-point bonus for consistent daily Discord logging.
         </div>
       </div>
       <div class="faq-item">

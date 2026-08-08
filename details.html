@@ -84,6 +84,39 @@
       .theme-grid { grid-template-columns: 1fr; }
       .details-nav { position: relative; top: 0; border-radius: 16px; }
     }
+    @media print {
+      .navbar, .details-nav, .no-print, .bg-grid, #canvas-container {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-family: Arial, sans-serif !important;
+      }
+      main.section {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+      .card {
+        border: 1px solid #ccc !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        margin-bottom: 1.5rem !important;
+        padding: 1.5rem !important;
+      }
+      .hero-tag {
+        border: 1px solid #000 !important;
+        color: #000 !important;
+        background: none !important;
+      }
+      .data-table th, .data-table td, .rubric-table th, .rubric-table td {
+        border-color: #ddd !important;
+        color: #000 !important;
+      }
+      a { text-decoration: underline !important; color: #000 !important; }
+    }
   </style>
 </head>
 <body>
@@ -95,7 +128,12 @@
       <a href="index.html" class="logo">
         <span>🧬</span> HelixHack_
       </a>
-      <ul class="nav-links">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Overview</a></li>
         <li><a href="details.html" class="active">Rules & Details</a></li>
         <li><a href="register.html">Register</a></li>
@@ -110,7 +148,16 @@
     <div class="section-header" style="margin-bottom: 2.5rem;">
       <div class="hero-tag" style="margin-bottom: 0.75rem;">Official Event Document</div>
       <h2 style="font-family:var(--font-heading);">HelixHack 2026 — Event Handbook</h2>
-      <p>Silicon Circle's First Teen Innovation Hackathon • Chennai, India • October 2026</p>
+      <p style="margin-bottom: 1.5rem;">Silicon Circle's First Teen Innovation Hackathon • Chennai, India • October 2026</p>
+      
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;" class="no-print">
+        <button onclick="downloadRulesAsPDF()" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem; box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);">
+          <span>📥</span> Download Rules & Details (PDF)
+        </button>
+        <a href="register.html" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem;">
+          <span>🚀</span> Register Team
+        </a>
+      </div>
     </div>
 
     <!-- Quick Sections Sticky Navigation -->
@@ -433,9 +480,9 @@
           </tr>
           <tr>
             <td style="color:var(--color-text-main); font-weight:600;">Feasibility & Practicality</td>
-            <td>25</td>
-            <td>Could this realistically be built? Are constraints, costs, and resources acknowledged?</td>
-            <td>Does prototype demonstrate a viable, scalable approach? Trade-offs understood?</td>
+            <td>25 pts</td>
+            <td>Can this realistically be built? Are real-world constraints and resource availability acknowledged?</td>
+            <td>Equal across all rounds</td>
           </tr>
           <tr>
             <td style="color:var(--color-text-main); font-weight:600;">Impact & Theme Relevance</td>
@@ -615,6 +662,10 @@
   </main>
 
   <script>
+    function downloadRulesAsPDF() {
+      window.print();
+    }
+
     function scrollToSection(id) {
       const el = document.getElementById(id);
       if (el) {
