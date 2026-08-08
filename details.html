@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.supabase.co; img-src 'self' data: https:; frame-ancestors 'none';">
-  <title>Rules & Details - HelixHack 2026</title>
+  <title>Rules & Official Handbook - HelixHack 2026</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css?v=3">
@@ -15,56 +15,65 @@
   <style>
     .details-nav {
       display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
       flex-wrap: wrap;
       justify-content: center;
+      position: sticky;
+      top: 80px;
+      z-index: 10;
+      background: rgba(10, 15, 30, 0.85);
+      backdrop-filter: blur(12px);
+      padding: 0.75rem 1rem;
+      border-radius: 40px;
+      border: 1px solid var(--border-glass);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     }
     .details-nav button {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border-glass);
       color: var(--color-text-dim);
-      padding: 0.6rem 1.2rem;
-      border-radius: 30px;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
       cursor: pointer;
       font-family: var(--font-heading);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 500;
       transition: all 0.3s;
+      white-space: nowrap;
     }
     .details-nav button:hover, .details-nav button.active {
-      background: rgba(14, 165, 233, 0.1);
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(139, 92, 246, 0.15));
       border-color: var(--color-primary);
       color: var(--color-text-main);
-      box-shadow: 0 0 10px rgba(14, 165, 233, 0.15);
+      box-shadow: 0 0 12px rgba(14, 165, 233, 0.25);
     }
-    .rubric-table {
+    .data-table {
       width: 100%;
       border-collapse: collapse;
       margin: 1.5rem 0;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
-    .rubric-table th, .rubric-table td {
-      padding: 0.75rem 1rem;
+    .data-table th, .data-table td {
+      padding: 0.8rem 1rem;
       text-align: left;
       border-bottom: 1px solid var(--border-glass);
     }
-    .rubric-table th {
+    .data-table th {
       color: var(--color-primary);
       font-family: var(--font-heading);
       font-weight: 600;
+      background: rgba(255,255,255,0.02);
     }
     .rule-card {
       border-left: 4px solid var(--color-primary);
-      padding-left: 1rem;
+      padding: 1rem 1.25rem;
       margin-bottom: 1rem;
+      background: rgba(255, 255, 255, 0.01);
+      border-radius: 0 8px 8px 0;
     }
-    .rule-card.permitted {
-      border-left-color: var(--color-accent);
-    }
-    .rule-card.forbidden {
-      border-left-color: #f43f5e;
-    }
+    .rule-card.permitted { border-left-color: var(--color-accent); }
+    .rule-card.forbidden { border-left-color: #f43f5e; }
     .theme-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -72,9 +81,8 @@
       margin-top: 1.5rem;
     }
     @media (max-width: 768px) {
-      .theme-grid {
-        grid-template-columns: 1fr;
-      }
+      .theme-grid { grid-template-columns: 1fr; }
+      .details-nav { position: relative; top: 0; border-radius: 16px; }
     }
   </style>
 </head>
@@ -97,302 +105,525 @@
     </div>
   </nav>
 
-  <!-- Content -->
-  <main class="section" style="max-width: 1000px; padding-top: 3rem;">
-    <div class="section-header" style="margin-bottom: 3rem;">
-      <h2 style="font-family:var(--font-heading);">Rules & Event Guidelines</h2>
-      <p>Your complete reference for categories, themes, evaluation rubrics, and participation protocols.</p>
+  <!-- Content Container -->
+  <main class="section" style="max-width: 1050px; padding-top: 3rem;">
+    <div class="section-header" style="margin-bottom: 2.5rem;">
+      <div class="hero-tag" style="margin-bottom: 0.75rem;">Official Event Document</div>
+      <h2 style="font-family:var(--font-heading);">HelixHack 2026 — Event Handbook</h2>
+      <p>Silicon Circle's First Teen Innovation Hackathon • Chennai, India • October 2026</p>
     </div>
 
-    <!-- Quick Sections Navigation -->
+    <!-- Quick Sections Sticky Navigation -->
     <div class="details-nav">
-      <button class="active" onclick="scrollToSection('sec-about')">❓ About HelixHack</button>
-      <button onclick="scrollToSection('sec-categories')">📦 Categories</button>
-      <button onclick="scrollToSection('sec-themes')">💡 Themes</button>
-      <button onclick="scrollToSection('sec-rubric')">📊 Judging Rubric</button>
-      <button onclick="scrollToSection('sec-discord')">📝 Discord Daily Logs</button>
-      <button onclick="scrollToSection('sec-ai')">🤖 AI Tool Policy</button>
-      <button onclick="scrollToSection('sec-awards')">🏆 Special Awards</button>
+      <button class="active" onclick="scrollToSection('sec-about')">1. Overview</button>
+      <button onclick="scrollToSection('sec-themes')">2. Themes</button>
+      <button onclick="scrollToSection('sec-participation')">3. Participation</button>
+      <button onclick="scrollToSection('sec-ai')">4. AI Policy</button>
+      <button onclick="scrollToSection('sec-ambassador')">5. Ambassadors</button>
+      <button onclick="scrollToSection('sec-registration')">6. Registration</button>
+      <button onclick="scrollToSection('sec-rounds')">7. Rounds</button>
+      <button onclick="scrollToSection('sec-rubric')">8. Rubric</button>
+      <button onclick="scrollToSection('sec-finale')">9. Finale Day</button>
+      <button onclick="scrollToSection('sec-prizes')">10. Prizes</button>
+      <button onclick="scrollToSection('sec-discord')">11. Discord Logs</button>
+      <button onclick="scrollToSection('sec-stem')">12. STEM Basis</button>
+      <button onclick="scrollToSection('sec-different')">13. Highlights</button>
+      <button onclick="scrollToSection('sec-timeline')">14. Timeline</button>
     </div>
 
-    <!-- 1. About -->
+    <!-- 1. What Is HelixHack? -->
     <section id="sec-about" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
-      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">🧬 1. What Is HelixHack?</h3>
-      <p style="color:var(--color-text-dim); margin-bottom:1.5rem; line-height:1.7;">
-        HelixHack is Silicon Circle's inaugural teen innovation hackathon, held in Chennai in October 2026. It is a city-wide, team-based event that challenges students from Grade 8 to Grade 12 to design and build solutions to real-world problems using science, technology, engineering, and mathematics (STEM) as their foundation.
+      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">1. What Is HelixHack?</h3>
+      <p style="color:var(--color-text-dim); margin-bottom:1.25rem; line-height:1.7;">
+        HelixHack is Silicon Circle's inaugural teen innovation hackathon, held in Chennai in October 2026. It is a city-wide, team-based event that challenges students from Grade 8 to Grade 12 to design and build solutions to real-world problems across four themes, using science, technology, engineering, and mathematics (STEM) as their foundation.
       </p>
-      
-      <h4 class="font-heading mb-2" style="font-size:1.1rem;">Why Silicon Circle Is Organising This</h4>
       <p style="color:var(--color-text-dim); margin-bottom:1.5rem; line-height:1.7;">
-        Most hackathons available to teens in Chennai are too senior in scope, too niche, or not locally accessible. HelixHack fills that gap by creating a structured, mentored, and genuinely rigorous competition designed specifically for school-age innovators.
+        Teams participate in one of two categories: <strong>Pitch-Only</strong> (ideation and research-based) or <strong>Prototype</strong> (working model, app, hardware, or software). The event spans online qualifying rounds followed by an offline finale demo day held during the Navratri school holidays on <strong>Saturday, October 18, 2026</strong>.
       </p>
 
-      <div class="grid-3" style="gap: 1.5rem; margin-top: 1.5rem;">
-        <div class="card" style="padding: 1rem; border-color: var(--border-glass); text-align: center; background: rgba(255,255,255,0.01);">
-          <span style="font-size: 1.5rem;">👥</span>
-          <h5 class="font-heading mt-1" style="font-size: 0.9rem;">Team Size</h5>
-          <p style="font-size: 0.8rem; color: var(--color-text-dim);">2 to 5 members per team</p>
-        </div>
-        <div class="card" style="padding: 1rem; border-color: var(--border-glass); text-align: center; background: rgba(255,255,255,0.01);">
-          <span style="font-size: 1.5rem;">🎓</span>
-          <h5 class="font-heading mt-1" style="font-size: 0.9rem;">Eligibility</h5>
-          <p style="font-size: 0.8rem; color: var(--color-text-dim);">Grade 8 to Grade 12 teens</p>
-        </div>
-        <div class="card" style="padding: 1rem; border-color: var(--border-glass); text-align: center; background: rgba(255,255,255,0.01);">
-          <span style="font-size: 1.5rem;">📍</span>
-          <h5 class="font-heading mt-1" style="font-size: 0.9rem;">Location</h5>
-          <p style="font-size: 0.8rem; color: var(--color-text-dim);">Chennai-based (offline finale)</p>
-        </div>
+      <h4 class="font-heading mb-2" style="font-size:1.1rem; color:var(--color-secondary);">Why Silicon Circle Is Organising This</h4>
+      <p style="color:var(--color-text-dim); margin-bottom:1.5rem; line-height:1.7;">
+        Most hackathons available to teens in Chennai are too senior in scope, too niche, or not locally accessible. HelixHack fills that gap by creating a structured, mentored, and genuinely rigorous competition designed specifically for school-age innovators. Silicon Circle is a teen-led community. We believe students do not need to wait until they graduate before making meaningful contributions to real problems.
+      </p>
+
+      <h4 class="font-heading mb-3" style="font-size:1.1rem; color:var(--color-primary);">Event Format at a Glance</h4>
+      <div style="overflow-x: auto;">
+        <table class="data-table">
+          <thead>
+            <tr><th>Item</th><th>Details</th></tr>
+          </thead>
+          <tbody style="color:var(--color-text-dim);">
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Event Name</td><td>HelixHack 2026</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Organiser</td><td>Silicon Circle</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Location</td><td>Chennai, Tamil Nadu, India</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Participation Region</td><td>Chennai city — open to all Chennai-based teens</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Grade Range</td><td>Grade 8 to Grade 12</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Team Size</td><td>2 to 5 members per team; members may be from different schools</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Format</td><td>Online qualifying rounds + Offline finale demo day</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Categories</td><td>Pitch-Only (ideation) | Prototype (working implementation)</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Registration Opens</td><td>Tuesday, September 15, 2026</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Registration Closes</td><td>Thursday, September 25, 2026</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Finale Date</td><td>Saturday, October 18, 2026 (Navratri school holiday window)</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Starting Budget</td><td>Domain and server hosting only; all other costs funded via fees and collaborator</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
-    <!-- 2. Categories -->
-    <section id="sec-categories" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
-      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">📦 2. Participation Categories</h3>
-      <p style="color:var(--color-text-dim); margin-bottom:1.5rem;">
-        Teams choose to compete in one of two categories. Both categories compete within the same themes and use the same core judging rubric, but have different expectations for output:
-      </p>
-
-      <div class="grid-2" style="gap:1.5rem;">
-        <div class="card" style="background: rgba(139, 92, 246, 0.02); border-color: rgba(139, 92, 246, 0.15);">
-          <span class="stat-badge warn" style="margin-bottom:0.5rem;">Pitch-Only Category</span>
-          <p style="color:var(--color-text-dim); font-size:0.9rem; line-height:1.6; margin-top:0.5rem;">
-            Teams present a well-argued, research-backed idea or concept. No working model or prototype is required. 
-            <br><br>
-            <strong>Key Focus:</strong> Depth of thinking, feasibility analysis, STEM rationale, and presentation skills.
-          </p>
-        </div>
-        <div class="card" style="background: rgba(16, 185, 129, 0.02); border-color: rgba(16, 185, 129, 0.15);">
-          <span class="stat-badge" style="margin-bottom:0.5rem;">Prototype Category</span>
-          <p style="color:var(--color-text-dim); font-size:0.9rem; line-height:1.6; margin-top:0.5rem;">
-            Teams must build a working implementation: software (an app, web tool, system) or hardware (working model, physical device).
-            <br><br>
-            <strong>Key Focus:</strong> Pitch-Only criteria, plus engineering execution quality and technical sophistication. (Prototype teams receive additional weight on the Execution & Quality criterion).
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. Themes -->
+    <!-- 2. Themes -->
     <section id="sec-themes" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
-      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">💡 3. Hackathon Themes</h3>
+      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">2. Themes</h3>
       <p style="color:var(--color-text-dim);">
-        All teams must build their projects within one of the four broad themes below:
+        All teams must build their project within one of the four themes below. Themes are intentionally broad to allow creative interpretation, while focused enough to give teams a clear problem space to work within.
       </p>
 
       <div class="theme-grid">
         <div class="card" style="padding:1.5rem; background:rgba(255,255,255,0.01); border-color:var(--border-glass);">
-          <h4 class="font-heading" style="color:var(--color-primary); font-size:1rem; margin-bottom:0.5rem;">Theme 1: AI & Emerging Technology</h4>
+          <h4 class="font-heading" style="color:var(--color-primary); font-size:1.05rem; margin-bottom:0.5rem;">Theme 1: AI & Emerging Technology</h4>
           <p style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6;">
-            Projects that use, explore, or critically examine machine learning, automation, computer vision, robotics, or cutting-edge systems.
-            <br><br>
-            <strong>Example problems:</strong> AI tools to identify struggling students early; automated waste sorting systems; local-language AI assistants.
+            Projects that use, explore, or critically examine artificial intelligence, machine learning, automation, computer vision, robotics, or other cutting-edge technologies to solve a real-world problem.
+          </p>
+          <div style="margin-top:0.75rem; font-size:0.8rem; color:var(--color-secondary);">
+            <strong>Example problems:</strong> AI tools that identify struggling students early; automated waste sorting systems; local-language AI assistants for non-English speakers in Chennai.
+          </div>
+        </div>
+
+        <div class="card" style="padding:1.5rem; background:rgba(255,255,255,0.01); border-color:var(--border-glass);">
+          <h4 class="font-heading" style="color:var(--color-primary); font-size:1.05rem; margin-bottom:0.5rem;">Theme 2: Sustainability & Climate</h4>
+          <p style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6;">
+            Projects focused on environmental preservation, renewable energy, climate resilience, food security, water conservation, or building a more sustainable future for urban communities.
+          </p>
+          <div style="margin-top:0.75rem; font-size:0.8rem; color:var(--color-secondary);">
+            <strong>Example problems:</strong> Rooftop rainwater harvesting systems for Chennai apartments; apps that track a school's carbon footprint; biodegradable alternatives to single-use plastics.
+          </div>
+        </div>
+
+        <div class="card" style="padding:1.5rem; background:rgba(255,255,255,0.01); border-color:var(--border-glass);">
+          <h4 class="font-heading" style="color:var(--color-primary); font-size:1.05rem; margin-bottom:0.5rem;">Theme 3: Mental Health, Student Wellbeing & EdTech</h4>
+          <p style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6;">
+            Projects that address mental health challenges faced by students, or that use technology to improve how young people learn, study, and grow. This theme bridges emotional wellbeing with educational innovation.
+          </p>
+          <div style="margin-top:0.75rem; font-size:0.8rem; color:var(--color-secondary);">
+            <strong>Example problems:</strong> A peer-support platform for school students; a smart study scheduler that accounts for stress and burnout; gamified revision tools built for board exam pressure.
+          </div>
+        </div>
+
+        <div class="card" style="padding:1.5rem; background:rgba(255,255,255,0.01); border-color:var(--border-glass);">
+          <h4 class="font-heading" style="color:var(--color-primary); font-size:1.05rem; margin-bottom:0.5rem;">Theme 4: Accessibility & Inclusion</h4>
+          <p style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6;">
+            Projects that remove barriers for people with disabilities, language differences, economic disadvantages, or other challenges that limit their full participation in society, education, or technology.
+          </p>
+          <div style="margin-top:0.75rem; font-size:0.8rem; color:var(--color-secondary);">
+            <strong>Example problems:</strong> Sign-language translation tools; low-cost assistive devices for visually impaired students; simplified apps for first-generation smartphone users.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Participation & Categories -->
+    <section id="sec-participation" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
+      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">3. Participation & Categories</h3>
+      
+      <h4 class="font-heading mb-2" style="font-size:1.1rem; color:var(--color-secondary);">Who Can Participate</h4>
+      <ul style="color:var(--color-text-dim); padding-left:1.25rem; font-size:0.9rem; line-height:1.7; margin-bottom:1.5rem;">
+        <li>Students currently enrolled in Grade 8 through Grade 12 at any Chennai school.</li>
+        <li>Independent teens not affiliated with a school are also eligible to apply.</li>
+        <li>Teams may include members from different schools.</li>
+        <li>All participants must be in Chennai for the offline finale round.</li>
+      </ul>
+
+      <h4 class="font-heading mb-3" style="font-size:1.1rem; color:var(--color-primary);">Team Structure Rules</h4>
+      <div style="overflow-x: auto; margin-bottom: 2rem;">
+        <table class="data-table">
+          <thead><tr><th>Parameter</th><th>Rule</th></tr></thead>
+          <tbody style="color:var(--color-text-dim);">
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Minimum Team Size</td><td>2 members</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Maximum Team Size</td><td>5 members</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Cross-school Teams</td><td>Allowed and encouraged</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Independent Participants</td><td>Allowed; must form or join a team to compete</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Registration</td><td>One submission per team; one Team ID issued per team</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="font-heading mb-3" style="font-size:1.1rem; color:var(--color-primary);">Category Breakdown</h4>
+      <div class="grid-2" style="gap:1.5rem;">
+        <!-- Pitch-Only -->
+        <div class="card" style="background: rgba(139, 92, 246, 0.03); border-color: rgba(139, 92, 246, 0.2); padding:1.5rem;">
+          <span class="stat-badge warn" style="margin-bottom:0.75rem;">Pitch-Only Category</span>
+          <p style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6; margin-bottom:1rem;">
+            Teams develop a well-researched, evidence-backed idea for solving a real problem. No working prototype is required. The emphasis is on depth of thinking, scientific rationale, feasibility, and presentation skills.
+          </p>
+          <ul style="color:var(--color-text-dim); font-size:0.8rem; line-height:1.6; padding-left:1rem; display:flex; flex-direction:column; gap:0.4rem;">
+            <li><strong>Finale Format:</strong> Live stage presentation in fixed scheduled slots.</li>
+            <li><strong>Time per team:</strong> 5-minute pitch + 3-minute Q&A from judging panel.</li>
+            <li><strong>What to bring:</strong> Slide deck (main screen), printed references/materials.</li>
+            <li><strong>Judged on:</strong> Problem framing, depth of research, STEM basis, feasibility, clarity.</li>
+          </ul>
+        </div>
+        <!-- Prototype -->
+        <div class="card" style="background: rgba(16, 185, 129, 0.03); border-color: rgba(16, 185, 129, 0.2); padding:1.5rem;">
+          <span class="stat-badge" style="margin-bottom:0.75rem;">Prototype Category</span>
+          <p style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6; margin-bottom:1rem;">
+            Teams build a working implementation (software, hardware device, physical model, web or mobile app). Must demonstrate the solution in action live at the stall.
+          </p>
+          <ul style="color:var(--color-text-dim); font-size:0.8rem; line-height:1.6; padding-left:1rem; display:flex; flex-direction:column; gap:0.4rem;">
+            <li><strong>Finale Format:</strong> Stall-based expo hall with rotating judge visits.</li>
+            <li><strong>Time per team:</strong> 8–10 min per judge visit (5-min demo + 3-5 min Q&A).</li>
+            <li><strong>What to bring:</strong> Live prototype, project poster, data visualizations, stall decorations.</li>
+            <li><strong>Judged on:</strong> All Pitch-Only criteria + technical implementation quality and sophistication.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Vibe Coding and AI Tool Policy -->
+    <section id="sec-ai" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
+      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">4. Vibe Coding and AI Tool Policy</h3>
+      <p style="color:var(--color-text-dim); margin-bottom:1rem; line-height:1.7;">
+        The use of AI-assisted coding and development tools is permitted in HelixHack. This includes tools such as GitHub Copilot, Cursor, ChatGPT, Claude, v0, Replit AI, and any similar AI pair-programming or code-generation assistant.
+      </p>
+      <div style="background: rgba(14, 165, 233, 0.05); border:1px solid rgba(14, 165, 233, 0.2); padding:1rem 1.25rem; border-radius:10px; margin-bottom:1.5rem;">
+        <strong style="color:var(--color-primary);">Core Principle:</strong> <em>AI is a tool, not a team member. Teams are evaluated on their understanding and application of technology, not on their ability to prompt a model. One rule applies without exception: every team member must be able to fully explain their code, logic, design decisions, and implementation to judges at any point during the event.</em>
+      </div>
+
+      <div class="rule-card permitted">
+        <h4 class="font-heading" style="color:var(--color-accent); font-size:1rem; margin-bottom:0.25rem;">✅ Permitted Use</h4>
+        <ul style="color:var(--color-text-dim); font-size:0.85rem; padding-left:1rem; line-height:1.6;">
+          <li>Using AI tools to generate, assist, debug, or refactor code; scaffold boilerplate; generate design assets; or summarise background research.</li>
+          <li>Using AI-generated code or components, provided the team fully understands what the code does and why.</li>
+        </ul>
+      </div>
+
+      <div class="rule-card forbidden" style="margin-top:1rem;">
+        <h4 class="font-heading" style="color:#f43f5e; font-size:1rem; margin-bottom:0.25rem;">❌ Not Permitted Use</h4>
+        <ul style="color:var(--color-text-dim); font-size:0.85rem; padding-left:1rem; line-height:1.6;">
+          <li>Using AI to generate the core problem identification or innovation idea. The insight, framing, and direction must originate from the team.</li>
+          <li>Submitting AI-generated work that team members cannot explain. This is treated as academic dishonesty and results in disqualification.</li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin-top:1.25rem; background:rgba(255,255,255,0.01); border-color:var(--border-glass);">
+        <p style="color:var(--color-text-dim); font-size:0.85rem; margin:0;">
+          💡 <strong>Judge Expectation:</strong> At the finale, judges will ask teams to walk through sections of their code or hardware logic directly. Inability to answer clearly will result in score deductions under the STEM Integration and Presentation criteria.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. School Ambassador Programme -->
+    <section id="sec-ambassador" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem; margin-bottom:1rem;">
+        <h3 class="font-heading text-xl" style="color:var(--color-primary); margin:0;">5. School Ambassador Programme</h3>
+        <a href="register.html#ambassador" class="btn btn-primary btn-sm">Apply as Ambassador</a>
+      </div>
+      <p style="color:var(--color-text-dim); margin-bottom:1.5rem; line-height:1.7;">
+        School Ambassadors are student representatives from Chennai schools who drive registrations and awareness within their institutions. Each ambassador is the official Silicon Circle point of contact at their school.
+      </p>
+
+      <div class="grid-2" style="gap:1.5rem;">
+        <div class="card" style="background:rgba(255,255,255,0.01); padding:1.5rem;">
+          <h4 class="font-heading" style="color:var(--color-secondary); font-size:1rem; margin-bottom:0.75rem;">Ambassador Responsibilities</h4>
+          <ul style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6; padding-left:1.2rem;">
+            <li>Distribute registration information and links within their school.</li>
+            <li>Organise a short intro session or announcement using Silicon Circle materials.</li>
+            <li>Act as first point of contact for queries from students at their school.</li>
+            <li>Encourage their school's teams to stay active throughout all rounds.</li>
+          </ul>
+        </div>
+        <div class="card" style="background:rgba(255,255,255,0.01); padding:1.5rem;">
+          <h4 class="font-heading" style="color:var(--color-accent); font-size:1rem; margin-bottom:0.75rem;">What Ambassadors Receive</h4>
+          <ul style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6; padding-left:1.2rem;">
+            <li><strong>Title:</strong> "Silicon Circle Ambassador" — an officially recognized & credited role.</li>
+            <li><strong>Certificate:</strong> Official Ambassador certificate for college applications.</li>
+            <li><strong>Priority Registration:</strong> Ambassador's own team receives priority status.</li>
+            <li><strong>Innov8 Access:</strong> Exclusive access to monthly STEM Innov8 challenges.</li>
+            <li><strong>School Cup Credit:</strong> Earn points toward your school's School Cup trophy.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Registration & Key Dates -->
+    <section id="sec-registration" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
+      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">6. Registration & Key Dates</h3>
+      
+      <div style="overflow-x: auto; margin-bottom: 2rem;">
+        <table class="data-table">
+          <thead><tr><th>Date</th><th>Milestone</th></tr></thead>
+          <tbody style="color:var(--color-text-dim);">
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Mon, Sep 15</td><td>REGISTRATIONS OPEN. Ambassador activation. Marketing blast.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Fri, Sep 26 (Evening)</td><td>Mandatory GMeet Info Session for all registered participants.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Wed-Thu, Sep 24-25</td><td>Final registration push. Ambassador follow-ups at schools.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Thu, Sep 25 (EOD)</td><td>REGISTRATIONS CLOSE. Team count confirmed. Path A or Path B activated.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">Fri, Sep 26 (morning)</td><td>Post-registration agenda, Team ID, and Round 1 schedule sent to all teams.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="font-heading mb-2" style="font-size:1.1rem; color:var(--color-secondary);">GMeet Info Session — September 26, 2026</h4>
+      <p style="color:var(--color-text-dim); font-size:0.9rem; margin-bottom:1rem;">
+        A compulsory GMeet session held the day after registrations close. At least one team member per team must attend. Agenda:
+      </p>
+      <ul style="color:var(--color-text-dim); font-size:0.85rem; padding-left:1.25rem; line-height:1.6;">
+        <li>Event overview and full rules walkthrough.</li>
+        <li>Theme and category explanation with example projects.</li>
+        <li>Discord server onboarding and daily log requirement explanation.</li>
+        <li>Round 1 format and what judges expect.</li>
+        <li>Live Q&A with organizers Arnav and Maanas.</li>
+      </ul>
+    </section>
+
+    <!-- 7. Round Structure -->
+    <section id="sec-rounds" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
+      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">7. Round Structure</h3>
+      <p style="color:var(--color-text-dim); margin-bottom:1.5rem; line-height:1.7;">
+        The round structure depends on total registered teams. Silicon Circle will assess the count immediately after registrations close on September 25 and announce the activated path (Path A: under 1,000 teams; Path B: 1,000+ teams) that same evening.
+      </p>
+
+      <div class="grid-2" style="gap:1.5rem; margin-bottom:1.5rem;">
+        <div class="card" style="padding:1.5rem; background:rgba(255,255,255,0.01);">
+          <h4 class="font-heading" style="color:var(--color-primary); font-size:1rem; margin-bottom:0.5rem;">Round 1: Online GMeet Pitch (Sep 26-28)</h4>
+          <p style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6;">
+            <strong>Format:</strong> Live GMeet presentation to judges in scheduled slots.<br>
+            <strong>Duration:</strong> 5-minute pitch + 3-minute Q&A per team.<br>
+            <strong>Content:</strong> Problem statement, proposed solution, chosen theme/category, STEM basis.<br>
+            <strong>Judged by:</strong> Industry & collaborator judges using official scoring rubric.<br>
+            <strong>Results:</strong> Announced September 29 with specific written feedback sent within 48 hours.
           </p>
         </div>
-        <div class="card" style="padding:1.5rem; background:rgba(255,255,255,0.01); border-color:var(--border-glass);">
-          <h4 class="font-heading" style="color:var(--color-primary); font-size:1rem; margin-bottom:0.5rem;">Theme 2: Sustainability & Climate</h4>
+        <div class="card" style="padding:1.5rem; background:rgba(255,255,255,0.01);">
+          <h4 class="font-heading" style="color:var(--color-accent); font-size:1rem; margin-bottom:0.5rem;">Build Period & Finale (Sep 29 - Oct 18)</h4>
           <p style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6;">
-            Projects focused on environmental preservation, renewable energy, climate resilience, food security, or water conservation.
-            <br><br>
-            <strong>Example problems:</strong> Rooftop rainwater harvesting systems for Chennai apartments; carbon footprint trackers; biodegradable alternatives to single-use plastics.
-          </p>
-        </div>
-        <div class="card" style="padding:1.5rem; background:rgba(255,255,255,0.01); border-color:var(--border-glass);">
-          <h4 class="font-heading" style="color:var(--color-primary); font-size:1rem; margin-bottom:0.5rem;">Theme 3: Student Wellbeing & EdTech</h4>
-          <p style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6;">
-            Projects addressing student mental health challenges or using technology to improve how young people learn, study, and grow.
-            <br><br>
-            <strong>Example problems:</strong> Peer-support chat platforms; smart study schedulers accounting for burnout; gamified revision tools.
-          </p>
-        </div>
-        <div class="card" style="padding:1.5rem; background:rgba(255,255,255,0.01); border-color:var(--border-glass);">
-          <h4 class="font-heading" style="color:var(--color-primary); font-size:1rem; margin-bottom:0.5rem;">Theme 4: Accessibility & Inclusion</h4>
-          <p style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6;">
-            Projects removing barriers for people with disabilities, language differences, economic disadvantages, or other societal challenges.
-            <br><br>
-            <strong>Example problems:</strong> Sign-language translation tools; low-cost assistive hardware; simplified apps for first-gen smartphone users.
+            <strong>Build Period:</strong> Finalists have ~18 days (Path A: Sep 29–Oct 17) or 14 days (Path B: Oct 3–Oct 17) to develop, refine, and build their solutions.<br>
+            <strong>Daily Logs:</strong> Daily Discord progress uploads are mandatory.<br>
+            <strong>Finale Demo Day:</strong> Saturday, October 18, 2026 in Chennai.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- 4. Rubric -->
+    <!-- 8. Evaluation Criteria & Scoring Rubric -->
     <section id="sec-rubric" class="card" style="margin-bottom: 2rem; padding: 2.5rem; overflow-x: auto;">
-      <h3 class="font-heading text-xl mb-2" style="color:var(--color-primary);">📊 4. Scoring Rubric (100 Points)</h3>
-      <p style="color:var(--color-text-dim); font-size:0.9rem; margin-bottom:1.5rem;">
-        Judges apply this core rubric across all rounds. Score details are made visible to participants in their dashboards.
+      <h3 class="font-heading text-xl mb-2" style="color:var(--color-primary);">8. Evaluation Criteria & Scoring Rubric (100 Points)</h3>
+      <p style="color:var(--color-text-dim); font-size:0.85rem; margin-bottom:1.5rem;">
+        All rounds use the same core rubric. At the finale, Pitch-Only (stage panel) and Prototype (stall panel) are judged independently with separate placements.
       </p>
 
-      <table class="rubric-table">
+      <table class="data-table">
         <thead>
           <tr>
             <th>Criterion</th>
-            <th>Weight</th>
-            <th>What Judges Look For</th>
-            <th>Weighting Info</th>
+            <th>Pts</th>
+            <th>Pitch-Only — What Judges Look For</th>
+            <th>Prototype — What Judges Look For</th>
           </tr>
         </thead>
         <tbody style="color:var(--color-text-dim);">
           <tr>
             <td style="color:var(--color-text-main); font-weight:600;">Innovation & Originality</td>
-            <td>25 pts</td>
-            <td>Is the idea novel? Does it address a real, meaningful problem in a new or creative way?</td>
-            <td>Equal across all rounds</td>
+            <td>25</td>
+            <td>Is the idea novel? Does it address a real problem in a creative or non-obvious way?</td>
+            <td>Same. Does the chosen implementation approach reflect creative problem-solving?</td>
           </tr>
           <tr>
             <td style="color:var(--color-text-main); font-weight:600;">STEM Integration</td>
-            <td>20 pts</td>
-            <td>Is there a clear scientific, engineering, or mathematical basis? Are data, calculations, or technical rationale used?</td>
-            <td>Equal across all rounds</td>
+            <td>20</td>
+            <td>Clear scientific, engineering, or mathematical basis? Are data/calculations used?</td>
+            <td>Is implementation grounded in sound engineering/CS? Can team explain the science?</td>
           </tr>
           <tr>
             <td style="color:var(--color-text-main); font-weight:600;">Feasibility & Practicality</td>
-            <td>20 pts</td>
-            <td>Can this realistically be built? Are real-world constraints and resource availability acknowledged?</td>
-            <td>Equal across all rounds</td>
+            <td>25</td>
+            <td>Could this realistically be built? Are constraints, costs, and resources acknowledged?</td>
+            <td>Does prototype demonstrate a viable, scalable approach? Trade-offs understood?</td>
           </tr>
           <tr>
             <td style="color:var(--color-text-main); font-weight:600;">Impact & Theme Relevance</td>
-            <td>15 pts</td>
-            <td>How significant is the problem? Does the solution meaningfully align with the chosen theme?</td>
-            <td>Equal across all rounds</td>
+            <td>15</td>
+            <td>How significant is the problem? Does solution align meaningfully with theme?</td>
+            <td>Same. Does working prototype address a meaningful problem within theme?</td>
           </tr>
           <tr>
             <td style="color:var(--color-text-main); font-weight:600;">Execution & Quality</td>
-            <td>10 pts</td>
-            <td>Online rounds: clarity and depth of plan. Finale: quality of prototype or working model (scored more rigorously).</td>
-            <td>Higher weight at Finale</td>
+            <td>10</td>
+            <td>Depth and clarity of the idea. Research quality. Strength of slide deck.</td>
+            <td>Quality of working prototype. Reliability of demo. (Weighted heavily for Prototype).</td>
           </tr>
           <tr>
             <td style="color:var(--color-text-main); font-weight:600;">Presentation & Communication</td>
-            <td>10 pts</td>
-            <td>Does the team explain their idea clearly? Can they answer judge Q&A questions confidently?</td>
-            <td>Equal across all rounds</td>
+            <td>10</td>
+            <td>Stage presence, clarity of delivery, ability to handle Q&A confidently.</td>
+            <td>Ability to walk judges through prototype fluently and answer technical questions.</td>
           </tr>
           <tr>
             <td style="color:var(--color-accent); font-weight:600;">Daily Discord Consistency</td>
-            <td style="color:var(--color-accent);">+5 bonus</td>
-            <td>Consistency and quality of daily progress logs submitted during the Build Period.</td>
-            <td>Finale only (bonus)</td>
+            <td style="color:var(--color-accent);">+5</td>
+            <td colspan="2" style="text-align:center;">Consistency and quality of daily progress logs during Build Period (bonus points).</td>
           </tr>
+        </tbody>
+      </table>
+
+      <h4 class="font-heading mt-4 mb-2" style="font-size:1rem; color:var(--color-secondary);">Feedback Policy</h4>
+      <p style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6;">
+        Silicon Circle is committed to giving <strong>every team — including eliminated teams — specific, written, individual feedback</strong> after every round within 48 hours. Feedback is delivered via email and student dashboards.
+      </p>
+    </section>
+
+    <!-- 9. Finale — Demo Day -->
+    <section id="sec-finale" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
+      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">9. Finale — Demo Day</h3>
+      <p style="color:var(--color-text-dim); margin-bottom:1.5rem; line-height:1.7;">
+        <strong>Date:</strong> Saturday, October 18, 2026 (Navratri school holiday window: October 11–19, 2026 — no school conflict).<br>
+        <strong>Location:</strong> Exhibition hall with stage, Chennai.<br>
+        <strong>Format:</strong> Dual-format — Pitch-Only teams present on stage; Prototype teams present at stalls simultaneously.
+      </p>
+
+      <h4 class="font-heading mb-3" style="font-size:1.1rem; color:var(--color-primary);">Full Finale Schedule — Saturday, October 18, 2026</h4>
+      <div style="overflow-x: auto;">
+        <table class="data-table">
+          <thead><tr><th>Time</th><th>Activity</th></tr></thead>
+          <tbody style="color:var(--color-text-dim);">
+            <tr><td style="color:var(--color-text-main); font-weight:600;">9:00 AM</td><td>Venue opens. Volunteers at entry: pass & ID distribution. Prototype teams proceed to stalls.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">9:00 - 9:30 AM</td><td>Prototype teams set up stalls (posters, prototypes). Pitch-Only final slide check on stage AV.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">9:30 - 10:00 AM</td><td>Icebreaker Bingo session. All teams mingle — Pitch-Only and Prototype together.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">10:00 AM</td><td>JUDGING BEGINS. Stage judging (Pitch-Only) & Stall judging (Prototype) run simultaneously.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">10:00 AM - 12:30 PM</td><td>Judging window. Pitch-Only stage slots back-to-back. Prototype stall judges rotate floor.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">12:30 PM</td><td>Judging concludes. Lunch break. People's Choice Vote closes on social media.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">1:30 PM</td><td>Speaker session on stage: representative from collaborator addresses all participants.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">2:00 PM</td><td>Judge score consolidation & deliberation off-stage by Silicon Circle panels.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">3:00 PM</td><td>Results announced on stage. Special awards first, then category placements (3rd, 2nd, 1st).</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">3:30 PM</td><td>Prize and certificate distribution on stage. Collaborator presents to category winners.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">4:00 PM</td><td>Group photos, open networking, and informal venue time.</td></tr>
+            <tr><td style="color:var(--color-text-main); font-weight:600;">4:30 PM</td><td>Venue closes. Event ends.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10. Prizes -->
+    <section id="sec-prizes" class="card" style="margin-bottom: 2rem; padding: 2.5rem; overflow-x: auto;">
+      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">10. Prizes & Award Categories</h3>
+      
+      <table class="data-table">
+        <thead><tr><th>Award</th><th>Prize & Recognition</th></tr></thead>
+        <tbody style="color:var(--color-text-dim);">
+          <tr style="background:rgba(139, 92, 246, 0.05);"><td colspan="2" style="color:var(--color-primary); font-weight:700;">PITCH-ONLY CATEGORY</td></tr>
+          <tr><td style="color:var(--color-text-main); font-weight:600;">Pitch-Only — 1st Place</td><td>Cash prize (TBD) + Trophy + Certificate + Incubation access + Joint recognition letter</td></tr>
+          <tr><td style="color:var(--color-text-main); font-weight:600;">Pitch-Only — 2nd Place</td><td>Cash prize (TBD) + Trophy + Certificate + Joint recognition letter</td></tr>
+          <tr><td style="color:var(--color-text-main); font-weight:600;">Pitch-Only — 3rd Place</td><td>Cash prize (TBD) + Trophy + Certificate</td></tr>
+          
+          <tr style="background:rgba(16, 185, 129, 0.05);"><td colspan="2" style="color:var(--color-accent); font-weight:700;">PROTOTYPE CATEGORY</td></tr>
+          <tr><td style="color:var(--color-text-main); font-weight:600;">Prototype — 1st Place</td><td>Cash prize (TBD) + Trophy + Certificate + Incubation access + Joint recognition letter</td></tr>
+          <tr><td style="color:var(--color-text-main); font-weight:600;">Prototype — 2nd Place</td><td>Cash prize (TBD) + Trophy + Certificate + Joint recognition letter</td></tr>
+          <tr><td style="color:var(--color-text-main); font-weight:600;">Prototype — 3rd Place</td><td>Cash prize (TBD) + Trophy + Certificate</td></tr>
+
+          <tr style="background:rgba(234, 179, 8, 0.05);"><td colspan="2" style="color:#eab308; font-weight:700;">SPECIAL AWARDS</td></tr>
+          <tr><td style="color:var(--color-text-main); font-weight:600;">People's Choice Award</td><td>Certificate + Spot prize (TBD) — open to both categories</td></tr>
+          <tr><td style="color:var(--color-text-main); font-weight:600;">Best STEM Implementation</td><td>Certificate + Spot prize (TBD) — open to both categories</td></tr>
+          <tr><td style="color:var(--color-text-main); font-weight:600;">Best Stall Award</td><td>Certificate — Prototype category only</td></tr>
+          <tr><td style="color:var(--color-text-main); font-weight:600;">Silicon Circle Fellows</td><td>Recognition certificate + Official Silicon Circle community membership</td></tr>
+          <tr><td style="color:var(--color-text-main); font-weight:600;">Daily Discord Star</td><td>Certificate — open to both categories</td></tr>
+          <tr><td style="color:var(--color-text-main); font-weight:600;">All Participants</td><td>Certificate of Participation — every registered team member receives one</td></tr>
         </tbody>
       </table>
     </section>
 
-    <!-- 5. Discord Daily Logs -->
+    <!-- 11. Discord Daily Progress Protocol -->
     <section id="sec-discord" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
-      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">📝 5. Discord Daily Progress Protocol</h3>
+      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">11. Discord Daily Progress Protocol</h3>
       <p style="color:var(--color-text-dim); margin-bottom:1.5rem; line-height:1.7;">
-        During the Build Period, all finalist teams must post daily progress updates on the Silicon Circle Discord server in the dedicated finalist channel. Missed days reduce your Daily Discord bonus score (up to 5 points).
+        During the Build Period, all finalist teams are required to post daily progress updates in the Silicon Circle Discord server's dedicated finalist channel. This requirement exists for three reasons: accountability, community energy, and fuelling the People's Choice vote.
       </p>
 
       <div class="grid-2" style="gap:1.5rem;">
-        <div class="card" style="padding:1.25rem; background:rgba(255,255,255,0.01); border-color:var(--border-glass);">
-          <h4 class="font-heading mb-2" style="color:var(--color-secondary); font-size:1rem;">What each update MUST include:</h4>
-          <ul style="color:var(--color-text-dim); padding-left:1.25rem; font-size:0.85rem; display:flex; flex-direction:column; gap:0.5rem;">
+        <div class="card" style="padding:1.25rem; background:rgba(255,255,255,0.01);">
+          <h4 class="font-heading mb-2" style="color:var(--color-secondary); font-size:1rem;">What Each Update Must Include</h4>
+          <ul style="color:var(--color-text-dim); font-size:0.85rem; padding-left:1.25rem; line-height:1.6;">
             <li>One or more photos showing physical or digital progress made that day.</li>
             <li>A written typeout of at least 3-5 sentences covering: what was done today, what worked, what didn't work, and what is next.</li>
           </ul>
         </div>
-        <div class="card" style="padding:1.25rem; background:rgba(255,255,255,0.01); border-color:var(--border-glass);">
-          <h4 class="font-heading mb-2" style="color:var(--color-accent); font-size:1rem;">Rules & Authenticity:</h4>
-          <ul style="color:var(--color-text-dim); padding-left:1.25rem; font-size:0.85rem; display:flex; flex-direction:column; gap:0.5rem;">
-            <li><strong>Frequency:</strong> One update per day, every day of the Build Period.</li>
-            <li><strong>Authenticity:</strong> Updates must reflect genuine progress. Copying previous updates or submitting placeholder posts will be penalized.</li>
-            <li><strong>Scope:</strong> Share the process, not the punchline. You are not required to reveal your core innovation idea publicly.</li>
+        <div class="card" style="padding:1.25rem; background:rgba(255,255,255,0.01);">
+          <h4 class="font-heading mb-2" style="color:var(--color-accent); font-size:1rem;">Rules & Integration</h4>
+          <ul style="color:var(--color-text-dim); font-size:0.85rem; padding-left:1.25rem; line-height:1.6;">
+            <li><strong>Frequency:</strong> One update per day. Missed days reduce bonus score (up to +5 pts).</li>
+            <li><strong>Authenticity:</strong> Must reflect genuine progress. Copying previous posts is penalized.</li>
+            <li><strong>People's Choice:</strong> Silicon Circle reshares build highlights on Instagram & LinkedIn.</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- 6. AI Policy -->
-    <section id="sec-ai" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
-      <h3 class="font-heading text-xl mb-2" style="color:var(--color-primary);">🤖 6. AI & Coding Tool Policy</h3>
-      <p style="color:var(--color-text-muted); font-size:0.8rem; margin-bottom:1.5rem;">Core Principle: AI is a tool, not a team member. Evaluated on understanding, not prompt mechanics.</p>
-
-      <div class="rule-card permitted">
-        <h4 class="font-heading" style="color:var(--color-accent); font-size:1rem; margin-bottom:0.25rem;">✅ Permitted Use</h4>
-        <p style="color:var(--color-text-dim); font-size:0.85rem;">
-          Using AI tools (Cursor, ChatGPT, Claude, GitHub Copilot, etc.) to generate, assist, debug, or refactor code; scaffold boilerplate; generate design assets; or summarize background research. Using AI-generated components is allowed *provided the team fully understands what the code does and why*.
-        </p>
-      </div>
-
-      <div class="rule-card forbidden" style="margin-top:1.5rem;">
-        <h4 class="font-heading" style="color:#f43f5e; font-size:1rem; margin-bottom:0.25rem;">❌ Not Permitted Use</h4>
-        <p style="color:var(--color-text-dim); font-size:0.85rem;">
-          Using AI to generate the core problem identification or innovation idea. The insight and framing must originate from the team. Submitting AI-generated work that team members cannot explain is treated as academic dishonesty and results in disqualification.
-        </p>
-      </div>
-
-      <div class="card" style="margin-top:1.5rem; background:rgba(254,242,242,0.01); border-color:rgba(14,165,233,0.2);">
-        <p style="color:var(--color-text-dim); font-size:0.85rem;">
-          💡 <strong>Judge Expectation:</strong> At the finale, judges will ask teams to walk through sections of their code or implementation and explain what it does and why that approach was chosen. Inability to answer clearly will result in score deductions under STEM Integration and Presentation criteria.
-        </p>
-      </div>
-    </section>
-
-    <!-- 7. Awards -->
-    <section id="sec-awards" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
-      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">🏆 7. Special Awards</h3>
-      <p style="color:var(--color-text-dim); margin-bottom:1.5rem;">
-        In addition to the main placement rubrics (1st, 2nd, 3rd place cash prizes & trophies), teams can qualify for these special distinctions at the Chennai finale:
+    <!-- 12. STEM Integration -->
+    <section id="sec-stem" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
+      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">12. STEM Integration Framework</h3>
+      <p style="color:var(--color-text-dim); margin-bottom:1.5rem; line-height:1.7;">
+        HelixHack is not just a technology competition. It is a STEM event. Every project, regardless of theme or category, must demonstrate grounding in science, technology, engineering, or mathematics.
       </p>
 
-      <div style="display:flex; flex-direction:column; gap:1rem;">
-        <div style="display:flex; gap:1rem; align-items:flex-start;">
-          <span style="font-size:1.25rem;">⭐</span>
-          <div>
-            <strong style="color:var(--color-text-main);">People's Choice Award:</strong>
-            <p style="color:var(--color-text-dim); font-size:0.85rem; margin-top:0.15rem;">Voted on by the public via social media engagement (Instagram and LinkedIn) during the Build Period. Spot prizes and certificates will be awarded.</p>
-          </div>
+      <div class="grid-2" style="gap:1.5rem;">
+        <div class="card" style="padding:1.25rem; background:rgba(255,255,255,0.01);">
+          <h4 class="font-heading" style="color:var(--color-primary); font-size:1rem; margin-bottom:0.5rem;">Encouraged Approaches</h4>
+          <ul style="color:var(--color-text-dim); font-size:0.85rem; padding-left:1.25rem; line-height:1.6;">
+            <li>Using real-world data or publicly available datasets to validate a problem.</li>
+            <li>Building hardware prototypes using Arduino, Raspberry Pi, or sensors.</li>
+            <li>Applying mathematical modelling, simulation, or statistical analysis.</li>
+            <li>Conducting a structured mini-experiment to test feasibility.</li>
+          </ul>
         </div>
-        <div style="display:flex; gap:1rem; align-items:flex-start;">
-          <span style="font-size:1.25rem;">🎨</span>
-          <div>
-            <strong style="color:var(--color-text-main);">Best Stall Award:</strong>
-            <p style="color:var(--color-text-dim); font-size:0.85rem; margin-top:0.15rem;">Awarded to the team with the most creative, well-organized, and visually effective stall presentation.</p>
-          </div>
-        </div>
-        <div style="display:flex; gap:1rem; align-items:flex-start;">
-          <span style="font-size:1.25rem;">⚙️</span>
-          <div>
-            <strong style="color:var(--color-text-main);">Best STEM Implementation:</strong>
-            <p style="color:var(--color-text-dim); font-size:0.85rem; margin-top:0.15rem;">Awarded to the team whose project most rigorously applies STEM principles, regardless of their final podium placements.</p>
-          </div>
-        </div>
-        <div style="display:flex; gap:1rem; align-items:flex-start;">
-          <span style="font-size:1.25rem;">🏫</span>
-          <div>
-            <strong style="color:var(--color-text-main);">The School Cup:</strong>
-            <p style="color:var(--color-text-dim); font-size:0.85rem; margin-top:0.15rem;">Awarded to the school whose teams collectively score the highest points across all rounds, fostering inter-school collaboration.</p>
-          </div>
-        </div>
-        <div style="display:flex; gap:1rem; align-items:flex-start;">
-          <span style="font-size:1.25rem;">🤝</span>
-          <div>
-            <strong style="color:var(--color-text-main);">Silicon Circle Fellows:</strong>
-            <p style="color:var(--color-text-dim); font-size:0.85rem; margin-top:0.15rem;">A formal recognition and certificate given to the most promising non-finalists eliminated in earlier rounds.</p>
-          </div>
+        <div class="card" style="padding:1.25rem; background:rgba(255,255,255,0.01);">
+          <h4 class="font-heading" style="color:var(--color-secondary); font-size:1rem; margin-bottom:0.5rem;">STEM Award</h4>
+          <p style="color:var(--color-text-dim); font-size:0.85rem; line-height:1.6;">
+            The <strong>Best STEM Implementation</strong> award is given specifically to the team whose project most rigorously and creatively applies STEM principles, whether through mathematics, physical engineering, scientific experimentation, or code.
+          </p>
         </div>
       </div>
     </section>
+
+    <!-- 13. What Makes HelixHack Different -->
+    <section id="sec-different" class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
+      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">13. What Makes HelixHack Different</h3>
+      
+      <div class="grid-2" style="gap:1.25rem; font-size:0.88rem; color:var(--color-text-dim);">
+        <div>⭐ <strong>People's Choice Award:</strong> Public social media voting during Build Period gives every team an audience.</div>
+        <div>🏫 <strong>School Cup:</strong> Schools compete through collective team performance, exciting school administrations.</div>
+        <div>🤝 <strong>Silicon Circle Fellows:</strong> Recognizes promising non-finalists with formal title and community membership.</div>
+        <div>🎲 <strong>Icebreaker Bingo:</strong> Finale game connecting teams from different schools before judging starts.</div>
+        <div>📝 <strong>Mandatory Individual Feedback:</strong> Every team receives specific written feedback within 48 hours.</div>
+        <div>📑 <strong>Daily Build Logs:</strong> Documented journey teaching teams to communicate progress under pressure.</div>
+        <div>🧩 <strong>Website Easter Egg:</strong> A hidden puzzle embedded on the site rewarding curious visitors.</div>
+        <div>♾️ <strong>Monthly Innov8 Community:</strong> Entry point into Silicon Circle's recurring monthly STEM challenges.</div>
+      </div>
+    </section>
+
+    <!-- 14. Full Weekly Timeline -->
+    <section id="sec-timeline" class="card" style="margin-bottom: 2rem; padding: 2.5rem; overflow-x: auto;">
+      <h3 class="font-heading text-xl mb-4" style="color:var(--color-primary); border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem;">14. Full Weekly Timeline</h3>
+      
+      <table class="data-table">
+        <thead><tr><th>Phase & Dates</th><th>Goals and Key Activities</th></tr></thead>
+        <tbody style="color:var(--color-text-dim);">
+          <tr><td style="color:var(--color-primary); font-weight:600;">Phase 1: Foundation<br>(Jul 1 - Jul 28)</td><td>Finalise event name, themes, rubric. Begin subdomain & site dev. Task board setup. Draft pitch deck & ambassador perks.</td></tr>
+          <tr><td style="color:var(--color-primary); font-weight:600;">Phase 2: Pre-Launch<br>(Jul 29 - Aug 25)</td><td>Finalise collaborator agreement. Website soft launch. Ambassador orientation. Marketing blast across IG & LinkedIn.</td></tr>
+          <tr><td style="color:var(--color-primary); font-weight:600;">Phase 3: Pre-Registration<br>(Aug 26 - Sep 20)</td><td>Full marketing push & ambassador spotlights. Build waitlists. Exam period low-frequency posts. Venue booking & fee setup.</td></tr>
+          <tr><td style="color:var(--color-primary); font-weight:600;">Phase 4: Registration<br>(Sep 22 - Sep 25)</td><td>REGISTRATIONS OPEN. Ambassador school activations. GMeet info session deck prep. Registration closes Sep 25 EOD.</td></tr>
+          <tr><td style="color:var(--color-accent); font-weight:600;">Phase 5: Qualifiers & Finale<br>(Sep 26 - Oct 18)</td><td>Round 1 GMeet pitches. Results Sep 29. Build Period active with daily Discord logs. People's Choice vote. FINALE DEMO DAY OCT 18.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
   </main>
 
   <script>
     function scrollToSection(id) {
       const el = document.getElementById(id);
       if (el) {
-        // Remove active class from all buttons
-        document.querySelectorAll('.details-nav button').forEach(btn => {
-          btn.classList.remove('active');
-        });
-        
-        // Find triggering button
+        document.querySelectorAll('.details-nav button').forEach(btn => btn.classList.remove('active'));
         const clickedBtn = Array.from(document.querySelectorAll('.details-nav button')).find(btn => btn.getAttribute('onclick').includes(id));
         if (clickedBtn) clickedBtn.classList.add('active');
 
         window.scrollTo({
-          top: el.offsetTop - 100,
+          top: el.offsetTop - 120,
           behavior: 'smooth'
         });
       }

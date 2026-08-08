@@ -99,9 +99,30 @@ CREATE POLICY "Allow authenticated update on feature_flags" ON feature_flags FOR
   USING (auth.role() = 'authenticated')
   WITH CHECK (auth.role() = 'authenticated');
 
+-- 6. Ambassadors Table
+CREATE TABLE IF NOT EXISTS ambassadors (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT NOT NULL DEFAULT '',
+  school TEXT NOT NULL,
+  grade TEXT DEFAULT '',
+  pitch TEXT DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'active',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE ambassadors ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public read on ambassadors" ON ambassadors FOR SELECT USING (true);
+CREATE POLICY "Allow public insert on ambassadors" ON ambassadors FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow authenticated update on ambassadors" ON ambassadors FOR UPDATE
+  USING (auth.role() = 'authenticated')
+  WITH CHECK (auth.role() = 'authenticated');
+
 -- NOTE: No DELETE policies are defined for any table. Deletion must be performed
 -- directly via the Supabase service role (dashboard or server-side only).
 
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_logs_team_id ON logs(team_id);
 CREATE INDEX IF NOT EXISTS idx_logs_date ON logs(date);
+CREATE INDEX IF NOT EXISTS idx_ambassadors_school ON ambassadors(school);

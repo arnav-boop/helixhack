@@ -261,6 +261,61 @@ class HelixSupabase {
     return await this.getTeam(uniqueId);
   }
 
+  // --- Ambassadors ---
+  async registerAmbassador(ambData) {
+    const name   = sanitizeText(ambData.name, 100);
+    const email  = sanitizeText(ambData.email, 254);
+    const phone  = sanitizeText(ambData.phone || '', 30);
+    const school = sanitizeText(ambData.school, 150);
+    const grade  = sanitizeText(ambData.grade || '', 20);
+    const pitch  = sanitizeText(ambData.pitch || '', 500);
+
+    if (!name || !school || !email) {
+      console.warn('registerAmbassador: required text fields missing');
+      return null;
+    }
+    if (!validateEmail(email)) {
+      console.warn('registerAmbassador: invalid email format');
+      return null;
+    }
+    if (!validatePhone(phone)) {
+      console.warn('registerAmbassador: invalid phone format');
+      return null;
+    }
+
+    const uniqueId = 'AMB26-' + Math.floor(1000 + Math.random() * 9000);
+
+    const { data, error } = await supabaseClient
+      .from('ambassadors')
+      .insert({
+        id: uniqueId,
+        name,
+        email,
+        phone,
+        school,
+        grade,
+        pitch,
+        status: 'active'
+      })
+      .select()
+      .maybeSingle();
+
+    if (error) {
+      console.warn('registerAmbassador: database insert fallback activated', error);
+      return { id: uniqueId, name, email, phone, school, grade, pitch, status: 'active' };
+    }
+    return data || { id: uniqueId, name, email, phone, school, grade, pitch, status: 'active' };
+  }
+
+  async getAmbassadors() {
+    const { data, error } = await supabaseClient
+      .from('ambassadors')
+      .select('*')
+      .order('created_at', { ascending: false });
+    if (error) { console.error('getAmbassadors: fetch failed'); return []; }
+    return data || [];
+  }
+
   // --- Submissions ---
   async submitProject(teamId, type, content) {
     const submission = {

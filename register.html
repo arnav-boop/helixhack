@@ -33,10 +33,20 @@
   </nav>
 
   <!-- Content -->
-  <main class="section" style="max-width: 800px; padding-top: 3rem;">
+  <main class="section" style="max-width: 850px; padding-top: 3rem;">
     <div class="section-header" style="margin-bottom: 2rem;">
-      <h2 style="font-family:var(--font-heading);">Register Your Team</h2>
-      <p>Forms must be filled out honestly. Registrations close Thursday, September 25, 2026.</p>
+      <h2 style="font-family:var(--font-heading);" id="reg-title">Register Your Team</h2>
+      <p id="reg-subtitle">Forms must be filled out honestly. Registrations close Thursday, September 25, 2026.</p>
+    </div>
+
+    <!-- Mode Selector Tabs -->
+    <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap;">
+      <button id="tab-team" class="tab-btn active" onclick="switchTab('team')">
+        <span>🚀</span> Team Registration
+      </button>
+      <button id="tab-ambassador" class="tab-btn" onclick="switchTab('ambassador')">
+        <span>🌟</span> School Ambassador Application
+      </button>
     </div>
 
     <!-- Registration Form Card -->
@@ -162,10 +172,139 @@
         </div>
       </div>
     </div>
+
+    <!-- School Ambassador Form Card (Hidden by default, toggled via tab) -->
+    <div class="card" id="ambassador-card" style="display: none;">
+      <!-- Perks Highlight Box -->
+      <div style="background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+        <h4 class="font-heading" style="color: var(--color-secondary); font-size: 1.1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span>🌟</span> Why Become a Silicon Circle School Ambassador?
+        </h4>
+        <div class="grid-2" style="gap: 1rem; font-size: 0.85rem; color: var(--color-text-dim);">
+          <div>🏆 <strong>Official Title & Certificate:</strong> Credited ambassador role for college applications.</div>
+          <div>⚡ <strong>Priority Registration:</strong> Priority status for your own hackathon team.</div>
+          <div>💡 <strong>Innov8 Access:</strong> Exclusive entry to monthly STEM Innov8 challenges.</div>
+          <div>🏫 <strong>School Cup Credit:</strong> Lead your school's teams to win the School Cup.</div>
+        </div>
+      </div>
+
+      <form id="amb-form" onsubmit="handleAmbassadorRegistration(event)">
+        <h3 class="font-heading text-lg mb-4" style="border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem; color:var(--color-primary);">School Ambassador Application</h3>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="ambName">Full Name</label>
+            <input type="text" id="ambName" class="form-input" placeholder="Your full name" maxlength="100" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ambSchool">School Name</label>
+            <input type="text" id="ambSchool" class="form-input" placeholder="e.g. PSBB Nungambakkam" maxlength="150" required />
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="form-group">
+            <label class="form-label" for="ambGrade">Grade / Standard</label>
+            <select id="ambGrade" class="form-input" required>
+              <option value="" disabled selected>Select grade</option>
+              <option value="Grade 8">Grade 8</option>
+              <option value="Grade 9">Grade 9</option>
+              <option value="Grade 10">Grade 10</option>
+              <option value="Grade 11">Grade 11</option>
+              <option value="Grade 12">Grade 12</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ambEmail">Email Address</label>
+            <input type="email" id="ambEmail" class="form-input" placeholder="your.name@example.com" maxlength="254" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ambPhone">Phone / WhatsApp</label>
+            <input type="tel" id="ambPhone" class="form-input" placeholder="e.g. +91 98765 43210" maxlength="20" pattern="[\d\s()\-+]{7,20}" title="Enter a valid phone number" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="ambPitch">Why do you want to represent your school as an Ambassador?</label>
+          <textarea id="ambPitch" class="form-input" rows="3" placeholder="Tell us briefly about your motivation, background, or interest in STEM/leadership..." maxlength="500" style="resize: vertical;"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-full">Apply as School Ambassador</button>
+      </form>
+
+      <!-- Ambassador Success Screen (Hidden by default) -->
+      <div id="amb-success-screen" style="display:none; text-align:center; padding:1.5rem 0;">
+        <span style="font-size: 3rem; color:var(--color-accent);">🌟</span>
+        <h3 class="font-heading text-2xl mb-2 mt-2">Ambassador Application Submitted!</h3>
+        <p style="color:var(--color-text-dim); margin-bottom:2rem;">Welcome to the Silicon Circle Ambassador Network.</p>
+
+        <div class="card" style="border-color:var(--color-secondary); background:rgba(139, 92, 246, 0.04); max-width:450px; margin:0 auto 2rem auto; text-align:left; display:flex; flex-direction:column; gap:0.5rem;">
+          <div>
+            <span style="color:var(--color-text-muted); font-size:0.85rem;">Ambassador ID:</span>
+            <div style="font-size:1.5rem; font-weight:800; font-family:var(--font-heading); color:var(--color-secondary); letter-spacing:0.05em;" id="display-amb-id">AMB26-XXXX</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:0.5rem; border-top:1px solid var(--border-glass); padding-top:0.5rem;">
+            <span style="color:var(--color-text-muted); font-size:0.85rem;">Name:</span>
+            <span style="font-weight:600;" id="display-amb-name">Name</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="color:var(--color-text-muted); font-size:0.85rem;">School:</span>
+            <span style="font-weight:600;" id="display-amb-school">School</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="color:var(--color-text-muted); font-size:0.85rem;">Status:</span>
+            <span style="font-weight:600; color:var(--color-accent);">Active Ambassador</span>
+          </div>
+        </div>
+
+        <p style="color:var(--color-text-dim); font-size:0.9rem; max-width:500px; margin:0 auto 2rem auto;">
+          Check your email for your official Ambassador Welcome Kit and Discord channel access details.
+        </p>
+
+        <div style="display:flex; gap:1rem; justify-content:center;">
+          <button type="button" class="btn btn-primary" onclick="switchTab('team')">Register a Team Now</button>
+          <a href="details.html#sec-about" class="btn btn-secondary">Read Ambassador Guide</a>
+        </div>
+      </div>
+    </div>
   </main>
 
   <script>
     let memberCount = 2; // Member 1 (leader) + Member 2 are default
+
+    function switchTab(mode) {
+      const teamCard = document.getElementById("registration-card");
+      const ambCard = document.getElementById("ambassador-card");
+      const tabTeam = document.getElementById("tab-team");
+      const tabAmb = document.getElementById("tab-ambassador");
+      const title = document.getElementById("reg-title");
+      const subtitle = document.getElementById("reg-subtitle");
+
+      if (mode === "ambassador") {
+        teamCard.style.display = "none";
+        ambCard.style.display = "block";
+        tabTeam.classList.remove("active");
+        tabAmb.classList.add("active");
+        title.innerText = "School Ambassador Application";
+        subtitle.innerText = "Become the official Silicon Circle student representative at your school.";
+        window.location.hash = "ambassador";
+      } else {
+        ambCard.style.display = "none";
+        teamCard.style.display = "block";
+        tabAmb.classList.remove("active");
+        tabTeam.classList.add("active");
+        title.innerText = "Register Your Team";
+        subtitle.innerText = "Forms must be filled out honestly. Registrations close Thursday, September 25, 2026.";
+        window.location.hash = "team";
+      }
+    }
+
+    // Auto-select tab based on URL hash on page load
+    window.addEventListener("DOMContentLoaded", () => {
+      if (window.location.hash === "#ambassador") {
+        switchTab("ambassador");
+      }
+    });
 
     function addMemberField() {
       if (memberCount >= 5) {
@@ -257,6 +396,32 @@
           document.getElementById("success-screen").style.display = "block";
         } else {
           alert("Registration failed. Please try again.");
+        }
+      } else {
+        alert("Database connection error. Please refresh and try again.");
+      }
+    }
+
+    async function handleAmbassadorRegistration(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById("ambName").value.trim();
+      const school = document.getElementById("ambSchool").value.trim();
+      const grade = document.getElementById("ambGrade").value;
+      const email = document.getElementById("ambEmail").value.trim();
+      const phone = document.getElementById("ambPhone").value.trim();
+      const pitch = document.getElementById("ambPitch").value.trim();
+
+      if (typeof db !== "undefined" && db.registerAmbassador) {
+        const amb = await db.registerAmbassador({ name, school, grade, email, phone, pitch });
+        if (amb) {
+          document.getElementById("amb-form").style.display = "none";
+          document.getElementById("display-amb-id").innerText = amb.id;
+          document.getElementById("display-amb-name").innerText = amb.name;
+          document.getElementById("display-amb-school").innerText = amb.school;
+          document.getElementById("amb-success-screen").style.display = "block";
+        } else {
+          alert("Ambassador registration failed. Please try again.");
         }
       } else {
         alert("Database connection error. Please refresh and try again.");

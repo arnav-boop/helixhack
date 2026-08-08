@@ -321,6 +321,7 @@ body {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* Sections */
@@ -758,6 +759,30 @@ select.form-input {
 }
 .modal-close:hover {
   color: var(--color-text-main);
+}
+
+/* --- Registration & Segmented Control Tabs --- */
+.tab-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  color: var(--color-text-dim);
+  padding: 0.8rem 1.6rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.tab-btn:hover, .tab-btn.active {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(139, 92, 246, 0.15));
+  border-color: var(--color-primary);
+  color: var(--color-text-main);
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.2);
+  transform: translateY(-2px);
 }
 
 /* --- Mobile Responsiveness --- */
